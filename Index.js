@@ -568,11 +568,7 @@ app.post("/insertCARsCHEMA",async(req,res)=>{
     model: "Creta",
     fuel_type: "Diesel",
     transmission: "Manual",
-    engine: {
-      type: "Naturally Aspirated",
-      cc: 1493,
-      torque: "250 Nm"
-    },
+    engine: { type: "Naturally Aspirated", cc: 1493, torque: "250 Nm" },
     features: ["Sunroof", "Leather Seats", "Wireless Charging", "Bluetooth"],
     sunroof: true,
     airbags: 6,
@@ -585,8 +581,173 @@ app.post("/insertCARsCHEMA",async(req,res)=>{
       { date: "2022-04-10", service_type: "Oil Change", cost: 5000 },
       { date: "2023-07-18", service_type: "Brake Replacement", cost: 12000 }
     ]
+  },
+  {
+    maker: "Maruti Suzuki",
+    model: "Baleno",
+    fuel_type: "Petrol",
+    transmission: "Automatic",
+    engine: { type: "Naturally Aspirated", cc: 1197, torque: "113 Nm" },
+    features: ["Projector Headlamps", "Apple CarPlay", "ABS"],
+    sunroof: false,
+    airbags: 2,
+    price: 850000,
+    owners: [
+      { name: "Baburao", purchase_date: "2020-08-22", location: "Pune" }
+    ],
+    service_history: [
+      { date: "2021-05-12", service_type: "Tire Rotation", cost: 2000 },
+      { date: "2022-11-05", service_type: "Battery Replacement", cost: 7000 }
+    ]
+  },
+  {
+    maker: "Mahindra",
+    model: "XUV700",
+    fuel_type: "Diesel",
+    transmission: "Manual",
+    engine: { type: "Turbocharged", cc: 2198, torque: "360 Nm" },
+    features: ["Cruise Control", "All-Wheel Drive", "Panoramic Sunroof"],
+    sunroof: true,
+    airbags: 6,
+    price: 2200000,
+    owners: [
+      { name: "Arjun", purchase_date: "2022-04-05", location: "Bangalore" }
+    ],
+    service_history: [
+      { date: "2023-04-12", service_type: "Oil Change", cost: 6000 },
+      { date: "2023-09-22", service_type: "Transmission Repair", cost: 25000 }
+    ]
+  },
+  {
+    maker: "Honda",
+    model: "City",
+    fuel_type: "Petrol",
+    transmission: "Automatic",
+    engine: { type: "Naturally Aspirated", cc: 1498, torque: "145 Nm" },
+    features: ["Auto AC", "Multi-angle Rearview Camera", "Keyless Entry"],
+    sunroof: false,
+    airbags: 4,
+    price: 1200000,
+    owners: [
+      { name: "Priya", purchase_date: "2021-06-10", location: "Chennai" }
+    ],
+    service_history: [
+      { date: "2022-07-18", service_type: "Oil Change", cost: 4000 },
+      { date: "2023-03-25", service_type: "Brake Replacement", cost: 10000 }
+    ]
+  },
+  {
+    maker: "Tata",
+    model: "Nexon",
+    fuel_type: "Petrol",
+    transmission: "Automatic",
+    engine: { type: "Turbocharged", cc: 1199, torque: "170 Nm" },
+    features: ["Touchscreen", "Reverse Camera", "Bluetooth Connectivity"],
+    sunroof: false,
+    airbags: 2,
+    price: 1100000,
+    owners: [
+      { name: "Rohit", purchase_date: "2020-09-05", location: "Kolkata" }
+    ],
+    service_history: [
+      { date: "2022-10-05", service_type: "Oil Change", cost: 5500 },
+      { date: "2023-04-12", service_type: "Tire Rotation", cost: 2500 }
+    ]
+  },
+  {
+    maker: "Hyundai",
+    model: "Venue",
+    fuel_type: "Petrol",
+    transmission: "Automatic",
+    engine: { type: "Turbocharged", cc: 998, torque: "172 Nm" },
+    features: ["Sunroof", "Rear Camera", "Keyless Entry", "Cruise Control"],
+    sunroof: true,
+    airbags: 4,
+    price: 1200000,
+    owners: [
+      { name: "Vikas", purchase_date: "2021-04-20", location: "Hyderabad" }
+    ],
+    service_history: [
+      { date: "2022-06-15", service_type: "Oil Change", cost: 4500 },
+      { date: "2023-05-10", service_type: "Tire Replacement", cost: 9000 }
+    ]
+  },
+  {
+    maker: "Tata",
+    model: "Harrier",
+    fuel_type: "Diesel",
+    transmission: "Automatic",
+    engine: { type: "Turbocharged", cc: 1956, torque: "350 Nm" },
+    features: ["Leather Upholstery", "Panoramic Sunroof", "Auto-Dimming IRVM"],
+    sunroof: true,
+    airbags: 6,
+    price: 2000000,
+    owners: [
+      { name: "Deepak", purchase_date: "2022-01-10", location: "Mumbai" }
+    ],
+    service_history: [
+      { date: "2022-10-15", service_type: "Transmission Repair", cost: 45000 },
+      { date: "2023-04-20", service_type: "Brake Replacement", cost: 15000 }
+    ]
+  },
+  {
+    maker: "Honda",
+    model: "Amaze",
+    fuel_type: "CNG",
+    transmission: "Manual",
+    engine: { type: "Naturally Aspirated", cc: 1199, torque: "110 Nm" },
+    features: ["Keyless Entry", "Auto AC", "Rear Parking Camera"],
+    sunroof: false,
+    airbags: 4,
+    price: 900000,
+    owners: [
+      { name: "Sanjay", purchase_date: "2021-03-18", location: "Pune" }
+    ],
+    service_history: [
+      { date: "2021-09-10", service_type: "CNG Kit Checkup", cost: 2500 },
+      { date: "2022-05-15", service_type: "Oil Change", cost: 3500 }
+    ]
+  },
+  {
+    maker: "Hyundai",
+    model: "Kona Electric",
+    fuel_type: "Electric",
+    transmission: "Automatic",
+    engine: { type: "Electric Motor", battery_capacity: "39.2 kWh", torque: "395 Nm" },
+    features: ["Wireless Charging", "Ventilated Seats", "Sunroof", "Auto AC"],
+    sunroof: true,
+    airbags: 6,
+    price: 2300000,
+    owners: [
+      { name: "Sneha", purchase_date: "2022-01-15", location: "Mumbai" }
+    ],
+    service_history: [
+      { date: "2022-09-10", service_type: "Battery Check", cost: 0 },
+      { date: "2023-06-05", service_type: "Brake Replacement", cost: 8000 }
+    ]
+  },
+  {
+    maker: "Maruti Suzuki",
+    model: "WagonR",
+    fuel_type: "CNG",
+    transmission: "Manual",
+    engine: { type: "Naturally Aspirated", cc: 998, torque: "90 Nm" },
+    features: ["Manual AC", "ABS", "Power Windows"],
+    sunroof: false,
+    airbags: 2,
+    price: 650000,
+    owners: [
+      { name: "Rahul", purchase_date: "2019-07-22", location: "Delhi" }
+    ],
+    service_history: [
+      { date: "2020-11-10", service_type: "CNG Kit Checkup", cost: 2000 },
+      { date: "2021-08-15", service_type: "Tire Rotation", cost: 1500 }
+    ]
   }
-])
+]
+
+  
+)
 res.json(CarDetails)
   } catch (error) {
     console.error(`something went wrong ${error}`)
