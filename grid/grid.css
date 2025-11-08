@@ -1,0 +1,118 @@
+/* RESET + BASE STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===== FEATURES SECTION ===== */
+.features-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Main heading */
+.features-main-heading {
+  font-size: 2rem;
+  margin-bottom: 50px;
+  font-weight: 600;
+}
+
+.highlight-tertiary {
+  color: #007bff;
+}
+
+/* ===== GRID CONTAINER ===== */
+.features-grid-cointener {
+  display: grid;
+  grid-template-columns: 1fr 1fr;      /* 2 columns */
+  grid-template-rows: repeat(3, auto); /* 3 rows */
+  row-gap: 30px;
+  column-gap: 30px;
+  align-items: center;
+}
+
+/* Each feature card */
+.features-grid-cointener > div {
+  display: contents; /* let inner elements behave as grid children */
+}
+
+/* ===== Common styles ===== */
+.feature-headings {
+  font-size: 1.3rem;
+  color: #222;
+  text-align: left;
+}
+
+.features-grid-cointener p {
+  text-align: left;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.feature-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== GRID POSITIONING for Zig-Zag Pattern ===== */
+
+/* Row 1 — Text left, Image right */
+.features-grid-cointener > div:nth-child(1) h3,
+.features-grid-cointener > div:nth-child(1) p {
+  grid-column: 1;
+  grid-row: 1;
+}
+.features-grid-cointener > div:nth-child(1) img {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* Row 2 — Image left, Text right */
+.features-grid-cointener > div:nth-child(2) img {
+  grid-column: 1;
+  grid-row: 2;
+}
+.features-grid-cointener > div:nth-child(2) h3,
+.features-grid-cointener > div:nth-child(2) p {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* Row 3 — Text left, Image right */
+.features-grid-cointener > div:nth-child(3) h3,
+.features-grid-cointener > div:nth-child(3) p {
+  grid-column: 1;
+  grid-row: 3;
+}
+.features-grid-cointener > div:nth-child(3) img {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/* ===== RESPONSIVE (stacked on mobile) ===== */
+@media (max-width: 768px) {
+  .features-grid-cointener {
+    grid-template-columns: 1fr;
+  }
+  .feature-img {
+    height: 200px;
+  }
+  .feature-headings,
+  .features-grid-cointener p {
+    text-align: center;
+  }
+}
