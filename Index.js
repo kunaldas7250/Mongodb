@@ -66,7 +66,8 @@ const path = require("path");
 const mongoose = require("./database/db/db"); // ✅ same mongoose instance
 const User = require("./database/schema/Schema"); // ✅ same connected model
 const Car=require("./database/schema/opertorSchema")
-const CarDetails=require("./database/schema/AggreateSchema")
+const CarDetails=require("./database/schema/AggreateSchema");
+const { model } = require("mongoose");
 const app = express();
 
 // Middleware
@@ -848,6 +849,123 @@ app.get("/avg", async (req, res) => {
     res.status(200).json({
       message: "✅ Average car price per maker",
       result: price
+    });
+  } catch (error) {
+    console.error(`❌ Something went wrong: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/match-cc", async (req, res) => {
+  try {
+    const user = await CarDetails.aggregate([
+      {
+        $match: {
+          maker: "Hyundai",
+          "engine.cc": { $gt: 1200 } // ✅ Nested field condition
+        }
+      }
+    ]);
+
+    res.json(user);
+  } catch (error) {
+    console.error(`❌ Something went wrong: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/search",async(req,res)=>{
+  try {
+    const user=await CarDetails.aggregate(
+      [
+        {$match:
+          {maker:"Maruti Suzuki",fuel_type:"Petrol"}
+        },
+        {$count:"total_cars"}
+      ]
+    )
+    res.json(user)
+  } catch (error) {
+    console.error(`❌ Something went wrong: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+})
+
+app.get("/pratice", async (req, res) => {
+  try {
+    const user = await CarDetails.aggregate([
+      // 1️⃣ Filter Hyundai cars
+      { $match: { maker: "Hyundai" } },
+
+      // 2️⃣ Group them by fuel_type
+      {
+        $group: {
+          _id: "$fuel_type",      // group key
+          total_cars: { $sum: 1 } // count number of cars in each group
+        }
+      }
+    ]);
+
+    res.json({
+      message: "✅ Total Hyundai cars by fuel type",
+      result: user
+    });
+  } catch (error) {
+    console.error(`❌ Something went wrong: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/specefic-information", async (req, res) => {
+  try {
+    const pratice = await CarDetails.aggregate([
+      // 1️⃣ Filter Hyundai cars
+      { 
+        $match: { maker: "Hyundai" } 
+      },
+      // 2️⃣ Project only selected fields
+      { 
+        $project: { 
+          model: 1, 
+          "engine.type": 1, 
+          "engine.torque": 1, 
+          price: 1, 
+          "owners.name": 1, 
+          _id: 0 
+        } 
+      }
+    ]);
+
+    res.json(pratice);
+  } catch (error) {
+    console.error(`❌ Something went wrong: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/specefic-information-sort", async (req, res) => {
+  try {
+    const pratice = await CarDetails.aggregate([
+      // 1️⃣ Filter only Hyundai cars
+      { 
+        $match: { maker: "Hyundai" } 
+      },
+      // 2️⃣ Select specific fields
+      { 
+        $project: { 
+          model: 1, 
+          "engine.type": 1, 
+          "engine.torque": 1, 
+          price: 1, 
+          "owners.name": 1, 
+          _id: 0 
+        } 
+      },
+      // 3️⃣ Sort results by model name
+      { 
+        $sort: { model: 1 }  // ✅ ascending (A → Z)
+      }
+    ]);
+
+    res.json({
+      message: "✅ Hyundai cars sorted by model name",
+      result: pratice
     });
   } catch (error) {
     console.error(`❌ Something went wrong: ${error}`);
