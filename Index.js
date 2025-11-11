@@ -1,65 +1,3 @@
-// const express=require("express")
-// const app=express()
-// app.use(express.json())
-// const Connection=require(".//database/db/db")
-// app.use(Connection)
-// const Schema=require("./database/schema/Schema")
-// app.use(express.urlencoded({extended:false}))
-// const path=require("path")
-// app.set("view engine",ejs)
-// app.set("views",path.join(__dirname,"views"))
-
-// app.get("/",async(req,res)=>{
-//     try {
-//         res.redirect("/inserted")
-//     } catch (error) {
-//         console.error( `something went wrong`)
-//     }
-// })
-// app.post("/inserted",async(req,res)=>{
-//     const { name, phonenumber, email, current_Address, permanent_Address } = req.body;
-// try {
-//     if(!name || !phonenumber || !email || !current_Address || ! permanent_Address){
-//         res.status(404).send("sorry please this filed")
-//     }
-//     const user=new Schema({
-//     name,
-//     phonenumber,
-//     email,
-//     address: {
-//         current_Address,
-//         permanent_Address,
-//       },
-// })
-// await user.save()
-// res.send("✅ User data inserted successfully!");
-// } catch (error) {
-//     console.error(`something went wrong ${error}`)
-//     res.status(500).send("❌ Error inserting user data.");
-// }
-// })
-
-// app.get("/findOne",async(req,res)=>{
-//     try {
-//         db.user.findOne()
-//     } catch (error) {
-//         console.error(`something went wrong ${error}`)
-//     }
-// })
-
-// app.get("/findmany",async(req,res)=>{
-//     try {
-//         db,user.findMany()
-//     } catch (error) {
-//         console.error(`something went wrong ${error}`)
-//     }
-// })
-
-// app.listen(4000,()=>{
-//     console.log(`your port is running at 4000 port`)
-// })
-
-
 
 const express = require("express");
 const path = require("path");
@@ -967,6 +905,42 @@ app.get("/specefic-information-sort", async (req, res) => {
       message: "✅ Hyundai cars sorted by model name",
       result: pratice
     });
+  } catch (error) {
+    console.error(`❌ Something went wrong: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/unwind", async (req, res) => {
+  try {
+    const user = await CarDetails.aggregate([
+      { $unwind: "$owners" }  // ✅ Deconstruct the 'owners' array
+    ]);
+    res.json(user);
+  } catch (error) {
+    console.error(`❌ Something went wrong: ${error}`);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/string-operator", async (req, res) => {
+  try {
+    const user = await CarDetails.aggregate([
+      // 1️⃣ Group cars by maker
+      { 
+        $group: { 
+          _id: "$maker", 
+          model: { $first: "$model" } //pick first model from each brand
+        } 
+      },
+      // 2️⃣ Create concatenated string of maker + model
+      { 
+        $project: { 
+          _id: 0, 
+          CarName: { $concat: ["$_id", " ", "$model"] } 
+        } 
+      }
+    ]);
+
+    res.json(user);
   } catch (error) {
     console.error(`❌ Something went wrong: ${error}`);
     res.status(500).send("Internal Server Error");

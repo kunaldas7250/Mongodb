@@ -2,11 +2,11 @@
   "name": "mongodb",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Index2.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "Index.js",
-    "nodemon": "Index.js"
+    "start": "Index2.js",
+    "dev": "nodemon Index2.js"
   },
   "keywords": [],
   "author": "",
